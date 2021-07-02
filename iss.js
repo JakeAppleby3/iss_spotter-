@@ -1,11 +1,9 @@
-
- 
 const request = require('request');
 
-const nextISSTimesForMyLocation = function (callback) {
+const nextISSTimesForMyLocation = function(callback) {
   fetchMyIP((error, ip) => {
     if (error) {
-      console.log(error)
+      console.log(error);
       return callback(error, null);
     }
     fetchCoordsByIP(ip, (error, loc) => {
@@ -37,8 +35,8 @@ const fetchMyIP = function(callback) {
     }
     const ip = JSON.parse(body).ip;
     callback(null, ip);
-  })
-}
+  });
+};
 
 const fetchCoordsByIP = function(ip, callback) {
   request(`https://freegeoip.app/json/${ip}`, (error, response, body) => {
@@ -65,7 +63,7 @@ const fetchISSFlyOverTimes = function(coords, callback) {
       callback(Error(msg), null);
       return;
     }
-    const passes  = JSON.parse(body).response;
+    const passes = JSON.parse(body).response;
     return callback(null, passes);
   });
 };
